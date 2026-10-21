@@ -4559,6 +4559,10 @@ type CacheCapabilities struct {
 	//
 	// Note that this does not imply which if any compressors are supported by
 	// the server at the gRPC level.
+	//
+	// REMOVED in v2.13: ByteStream API has been removed.
+	//
+	// Deprecated: Marked as deprecated in build/bazel/remote/execution/v2/remote_execution.proto.
 	SupportedCompressors []Compressor_Value `protobuf:"varint,6,rep,packed,name=supported_compressors,json=supportedCompressors,proto3,enum=build.bazel.remote.execution.v2.Compressor_Value" json:"supported_compressors,omitempty"`
 	// Compressors supported for inlined data in
 	// [BatchUpdateBlobs][build.bazel.remote.execution.v2.ContentAddressableStorage.BatchUpdateBlobs]
@@ -4581,6 +4585,10 @@ type CacheCapabilities struct {
 	// operation for RE API v2.12 and from the
 	// [ContentAddressableStorage.GetChunkMapping][build.bazel.remote.execution.v2.ContentAddressableStorage.GetChunkMapping]
 	// operation for RE API v2.13 or higher.
+	//
+	// REMOVED in v2.13: Blob splitting support is mandatory.
+	//
+	// Deprecated: Marked as deprecated in build/bazel/remote/execution/v2/remote_execution.proto.
 	SplitBlobSupport bool `protobuf:"varint,9,opt,name=split_blob_support,json=splitBlobSupport,proto3" json:"split_blob_support,omitempty"`
 	// Whether blob splicing is supported for the particular server/instance. If
 	// yes, the server/instance implements the specified behavior for blob
@@ -4589,6 +4597,10 @@ type CacheCapabilities struct {
 	// operation for RE API v2.12 and from the
 	// [ContentAddressableStorage.RegisterChunkMapping][build.bazel.remote.execution.v2.ContentAddressableStorage.RegisterChunkMapping]
 	// operation for RE API v2.13 or higher.
+	//
+	// REMOVED in v2.13: Blob splicing support is mandatory.
+	//
+	// Deprecated: Marked as deprecated in build/bazel/remote/execution/v2/remote_execution.proto.
 	SpliceBlobSupport bool `protobuf:"varint,10,opt,name=splice_blob_support,json=spliceBlobSupport,proto3" json:"splice_blob_support,omitempty"`
 	// The parameters for the FastCDC 2020 chunking algorithm.
 	// If set, the server supports the FastCDC chunking algorithm.
@@ -4665,6 +4677,7 @@ func (x *CacheCapabilities) GetSymlinkAbsolutePathStrategy() SymlinkAbsolutePath
 	return SymlinkAbsolutePathStrategy_UNKNOWN
 }
 
+// Deprecated: Marked as deprecated in build/bazel/remote/execution/v2/remote_execution.proto.
 func (x *CacheCapabilities) GetSupportedCompressors() []Compressor_Value {
 	if x != nil {
 		return x.SupportedCompressors
@@ -4686,6 +4699,7 @@ func (x *CacheCapabilities) GetMaxCasBlobSizeBytes() int64 {
 	return 0
 }
 
+// Deprecated: Marked as deprecated in build/bazel/remote/execution/v2/remote_execution.proto.
 func (x *CacheCapabilities) GetSplitBlobSupport() bool {
 	if x != nil {
 		return x.SplitBlobSupport
@@ -4693,6 +4707,7 @@ func (x *CacheCapabilities) GetSplitBlobSupport() bool {
 	return false
 }
 
+// Deprecated: Marked as deprecated in build/bazel/remote/execution/v2/remote_execution.proto.
 func (x *CacheCapabilities) GetSpliceBlobSupport() bool {
 	if x != nil {
 		return x.SpliceBlobSupport
@@ -5982,19 +5997,19 @@ const file_build_bazel_remote_execution_v2_remote_execution_proto_rawDesc = "" +
 	"\x04ZSTD\x10\x01\x12\v\n" +
 	"\aDEFLATE\x10\x02\x12\n" +
 	"\n" +
-	"\x06BROTLI\x10\x03\"\xfc\b\n" +
+	"\x06BROTLI\x10\x03\"\x88\t\n" +
 	"\x11CacheCapabilities\x12`\n" +
 	"\x10digest_functions\x18\x01 \x03(\x0e25.build.bazel.remote.execution.v2.DigestFunction.ValueR\x0fdigestFunctions\x12\x87\x01\n" +
 	" action_cache_update_capabilities\x18\x02 \x01(\v2>.build.bazel.remote.execution.v2.ActionCacheUpdateCapabilitiesR\x1dactionCacheUpdateCapabilities\x12u\n" +
 	"\x1bcache_priority_capabilities\x18\x03 \x01(\v25.build.bazel.remote.execution.v2.PriorityCapabilitiesR\x19cachePriorityCapabilities\x12:\n" +
 	"\x1amax_batch_total_size_bytes\x18\x04 \x01(\x03R\x16maxBatchTotalSizeBytes\x12\x87\x01\n" +
-	"\x1esymlink_absolute_path_strategy\x18\x05 \x01(\x0e2B.build.bazel.remote.execution.v2.SymlinkAbsolutePathStrategy.ValueR\x1bsymlinkAbsolutePathStrategy\x12f\n" +
-	"\x15supported_compressors\x18\x06 \x03(\x0e21.build.bazel.remote.execution.v2.Compressor.ValueR\x14supportedCompressors\x12~\n" +
+	"\x1esymlink_absolute_path_strategy\x18\x05 \x01(\x0e2B.build.bazel.remote.execution.v2.SymlinkAbsolutePathStrategy.ValueR\x1bsymlinkAbsolutePathStrategy\x12j\n" +
+	"\x15supported_compressors\x18\x06 \x03(\x0e21.build.bazel.remote.execution.v2.Compressor.ValueB\x02\x18\x01R\x14supportedCompressors\x12~\n" +
 	"\"supported_batch_update_compressors\x18\a \x03(\x0e21.build.bazel.remote.execution.v2.Compressor.ValueR\x1fsupportedBatchUpdateCompressors\x124\n" +
-	"\x17max_cas_blob_size_bytes\x18\b \x01(\x03R\x13maxCasBlobSizeBytes\x12,\n" +
-	"\x12split_blob_support\x18\t \x01(\bR\x10splitBlobSupport\x12.\n" +
+	"\x17max_cas_blob_size_bytes\x18\b \x01(\x03R\x13maxCasBlobSizeBytes\x120\n" +
+	"\x12split_blob_support\x18\t \x01(\bB\x02\x18\x01R\x10splitBlobSupport\x122\n" +
 	"\x13splice_blob_support\x18\n" +
-	" \x01(\bR\x11spliceBlobSupport\x12c\n" +
+	" \x01(\bB\x02\x18\x01R\x11spliceBlobSupport\x12c\n" +
 	"\x14fast_cdc_2020_params\x18\v \x01(\v22.build.bazel.remote.execution.v2.FastCdc2020ParamsR\x11fastCdc2020Params\x12]\n" +
 	"\x12rep_max_cdc_params\x18\f \x01(\v20.build.bazel.remote.execution.v2.RepMaxCdcParamsR\x0frepMaxCdcParams\"X\n" +
 	"\x11FastCdc2020Params\x12/\n" +
